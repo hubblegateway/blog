@@ -1,10 +1,5 @@
-@import "compass";
-@include global-reset;
+// Import all of react first
+@import "react/theme";
 
-@import "custom/colors";
-@import "custom/fonts";
-@import "custom/layout";
-@import "base";
-@import "partials";
-@import "plugins/**/*";
-@import "custom/styles";
+// Our custom scss can override react theme
+@import "custom/custom";
