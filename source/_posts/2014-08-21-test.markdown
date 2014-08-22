@@ -1,0 +1,11 @@
+---
+layout: post
+title: "test"
+date: 2014-08-21 18:56:56 -0400
+comments: true
+categories: 
+author: "Alex Browne"
+email: "stephenalexbrowne@gmail.com"
+---
+
+This is some content in a test post!

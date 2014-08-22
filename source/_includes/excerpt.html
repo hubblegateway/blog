@@ -1,0 +1,24 @@
+<div class="post">
+
+	{% if post.header_image %}
+	<a href="{{ root_url }}{{ post.url }}"class="pic">
+		<img src="{{ post.header_image }}" class="img-responsive" alt="{{post.title}}" />
+	</a>
+	{% endif %}
+
+	<div class="title">
+	{% comment %}
+		<a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</a>
+	{% endcomment %}
+	</div>
+	<div class="author">
+		<img src="images/testimonials/testimonial2.jpg" class="avatar" alt="author" />
+		Jessica Smith, October 03, 2013
+	</div>
+	<p class="intro">
+		By Ed Hawkins, University of Reading. Climate change is often seen as a recent phenomenon, but its roots are actually far older — the stuff that is currently happening is beyond my understanding.
+		<br />
+		Some people say design is about solving problems. Obviously designers solve problems but so do dentists. Design is about cultural invention.
+	</p>
+	<a href="blogpost.html" class="continue-reading">Continue reading this post</a>
+</div>

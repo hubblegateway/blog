@@ -1,0 +1,26 @@
+<div class="post">
+
+	{% if post.header_image %}
+	<a href="{{ root_url }}{{ post.url }}"class="pic">
+		<img src="{{ post.header_image }}" class="img-responsive" alt="{{post.title}}" />
+	</a>
+	{% endif %}
+
+	<div class="title">
+		<a href="{{ root_url }}{{ post.url }}">
+			{% if site.titlecase %}
+				{{ post.title | titlecase }}
+			{% else %}
+				{{ post.title }}
+			{% endif %}
+		</a>
+	</div>
+	<div class="author">
+		<img src="{% gravatar post.email %}" class="avatar" alt="author" />
+		{% if post.author %}{{post.author}}, {% endif %}October 03, 2013
+	</div>
+	<p class="intro">
+		{{ post.content | truncatehtml: 1000 }}
+	</p>
+	<a rel="full-article" class="continue-reading" href="{{ root_url }}{{ post.url }}">{{ site.excerpt_link }}</a>
+</div>
