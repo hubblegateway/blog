@@ -52,7 +52,7 @@ add the following yaml frontmatter to the top of the blog post:
 |--------------|------------------------------------------------------------------------------------------------------------------------------|
 | author       | The first and last name of the author (a.k.a. you!)                                                                          |
 | author_email | Your email address. Don't worry, it won't actually be displayed on the page, but is used for getting a nifty gravatar image. |
-| header_image | (optional) The url for the header image for the post, starting at /blog. You should put the actual image in source/images.   |
+| header_image | (optional) The url for the header image for the post, starting at public. You should put the actual image in source/images.   |
 
 Here's an example of the entire frontmatter section (including auto-generated info):
 
@@ -64,5 +64,9 @@ comments: true
 categories: 
 author: "Alex Browne"
 author_email: "stephenalexbrowne@gmail.com"
-header_image: http://lit-coast-9918.herokuapp.com/react12/images/blogpost5.png
+header_image: /blog/images/blogpost5.png
 ```
+
+NOTE: You will need to prefix the path to your header_image with `/blog/images`.
+the header_image url can also be non-local, but this is not recommended, since
+we would be relying on a 3rd party to keep the image up.

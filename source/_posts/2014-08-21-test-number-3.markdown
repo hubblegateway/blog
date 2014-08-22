@@ -6,7 +6,7 @@ comments: true
 categories: 
 author: "Alex Browne"
 author_email: "stephenalexbrowne@gmail.com"
-header_image: http://lit-coast-9918.herokuapp.com/react12/images/blogpost5.png
+header_image: /blog/images/blogpost5.png
 ---
 
 Lorem markdownum *squalebant trita*, in turget madida horrent foedere facit
