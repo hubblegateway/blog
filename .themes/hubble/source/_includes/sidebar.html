@@ -17,7 +17,7 @@
 	<div class="best-hits">
 		<strong>Recent Posts:</strong>
 		{% for post in site.posts limit: 5 %}
-			<a href="{{ root_url }}{{ post.url }}">
+			<a href="{{ site.root }}{{ post.url }}">
 				{% if site.titlecase %}
 					{{ post.title | titlecase }}
 				{% else %}
@@ -26,6 +26,6 @@
 			</a><br/>
 		{% endfor %}
 		<hr/>
-		<a href="archive">Archive</a>
+		<a href="{{ site.root }}/archive">Archive</a>
 	</div>
 </div>

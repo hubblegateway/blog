@@ -5,7 +5,7 @@ layout: archive
 {% for post in site.posts %}
 	<div class="post">
 		<div class="title">
-			<a href="{{ root_url }}{{ post.url }}">
+			<a href="{{ site.root }}{{ post.url }}">
 				{% if site.titlecase %}
 					{{ post.title | titlecase }}
 				{% else %}
@@ -21,7 +21,7 @@ layout: archive
 			{{ post.content | strip_html | truncate: 355 }}
 		</p>		
 	</div>
-	<a rel="full-article" class="continue-reading" href="{{ root_url }}{{ post.url }}">{{ site.excerpt_link }}</a>
+	<a rel="full-article" class="continue-reading" href="{{ site.root }}{{ post.url }}">{{ site.excerpt_link }}</a>
 	{% unless forloop.last %}
   		<hr/>
 	{% endunless %}
