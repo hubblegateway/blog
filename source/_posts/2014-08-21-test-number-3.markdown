@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "test number 3"
+title: "this is an extremely long title that we want to make sure does not run into anything else and mess up the layout"
 date: 2014-08-21 20:03:43 -0400
 comments: true
 categories: 
 author: "Alex Browne"
 email: "stephenalexbrowne@gmail.com"
-header_image: http://lit-coast-9918.herokuapp.com/react12/images/blogpost1.png
+header_image: http://lit-coast-9918.herokuapp.com/react12/images/blogpost5.png
 ---
 
 Lorem markdownum *squalebant trita*, in turget madida horrent foedere facit

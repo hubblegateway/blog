@@ -3,10 +3,61 @@
 <body id="blogpost">
   {% include header.html %}
 
-  {{ content | expand_urls: root_url }}
+   <div id="blogpost-wrapper">
+		<div class="container">
+			{% if page.header_image %}
+			<div class="row">
+				<div class="col-md-12">
+					<div class="main-pic">
+						<img src="{{ page.header_image }}" class="img-responsive" alt="{{page.title}}" />
+					</div>					
+				</div>
+			</div>
+			{% endif %}
+			<div class="row">
+				<div class="col-md-10 post">
+					<div class="title">
+						{% if site.titlecase %}
+							{{ page.title | titlecase }}
+						{% else %}
+							{{ page.title }}
+						{% endif %}
+					</div>
+					<div class="author">
+						<img src="{% gravatar page.email %}" class="avatar" alt="author" />
+						{% if page.author %}{{page.author}}, {% endif %} {{ page.date_time_html }}
+					</div>
+					<div class="content">
+						{{ content | expand_urls: root_url }}
+					</div>				
+				</div>
+			</div>
+			<div class="other-posts">
+				{% if page.previous %}
+		   		<a class="prev" href="{{page.previous.url}}">
+		   			&larr;
+		   			{% if site.titlecase %}
+							{{ page.previous.title | titlecase | truncate: 50}}
+						{% else %}
+							{{ page.previous.title | truncate: 50}}
+						{% endif %}
+		   		</a>
+				{% endif %}
+				{% if page.next %}
+					<a class="next pull-right" href="{{page.next.url}}">
+						{% if site.titlecase %}
+							{{ page.next.title | titlecase | truncate: 50}}
+						{% else %}
+							{{ page.next.title | truncate: 50}}
+						{% endif %}
+						&rarr;
+					</a>
+				{% endif %}
+			</div>	
+		</div>
+	</div>
 
   {% include footer.html %}
 
 </body>
 </html>
-  
