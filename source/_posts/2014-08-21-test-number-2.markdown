@@ -5,7 +5,7 @@ date: 2014-08-21 20:03:32 -0400
 comments: true
 categories: 
 author: "Alex Browne"
-email: "stephenalexbrowne@gmail.com"
+author_email: "stephenalexbrowne@gmail.com"
 ---
 
 # Adest hoc est occiderat indignis sensit Argiodus

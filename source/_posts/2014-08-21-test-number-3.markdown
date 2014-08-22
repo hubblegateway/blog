@@ -5,7 +5,7 @@ date: 2014-08-21 20:03:43 -0400
 comments: true
 categories: 
 author: "Alex Browne"
-email: "stephenalexbrowne@gmail.com"
+author_email: "stephenalexbrowne@gmail.com"
 header_image: http://lit-coast-9918.herokuapp.com/react12/images/blogpost5.png
 ---
 
