@@ -16,11 +16,15 @@
 
 	<div class="best-hits">
 		<strong>Recent Posts:</strong>
-		<a href="#">How to start a business</a>
-		<a href="#">How to sell online</a>
-		<a href="#">Climate change when needed</a>
-		<a href="#">Web development upstart</a>
-		<a href="#">Learn Rails in 30 days</a>
+		{% for post in site.posts limit: 5 %}
+			<a href="{{ root_url }}{{ post.url }}">
+				{% if site.titlecase %}
+					{{ post.title | titlecase }}
+				{% else %}
+					{{ post.title }}
+				{% endif %}
+			</a><br/>
+		{% endfor %}
 		<hr/>
 		<a href="#">Archive</a>
 	</div>
