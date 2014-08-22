@@ -17,7 +17,7 @@
 	</div>
 	<div class="author">
 		<img src="{% gravatar post.email %}" class="avatar" alt="author" />
-		{% if post.author %}{{post.author}}, {% endif %}October 03, 2013
+		{% if post.author %}{{post.author}}, {% endif %} {{ post.date_time_html }}
 	</div>
 	<p class="intro">
 		{{ post.content | truncatehtml: 1000 }}
