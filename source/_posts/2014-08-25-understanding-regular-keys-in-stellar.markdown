@@ -16,6 +16,8 @@ A Regular key is a secondary private key that can be assigned to your Stellar wa
 
 ## Creating and assigning a regular key
 
+NOTE: This code is not intended for actual use. If you are to do this process, it is highly recommended you generate a Stellar Wallet Address and private key using a random generator on your local computer instead of via an API call.
+
 1. The first step is to generate a Stellar wallet address and private key:
 
 	curl -X POST https://live.stellar.org:9002 -d '{ "method" : "create_keys" }'
