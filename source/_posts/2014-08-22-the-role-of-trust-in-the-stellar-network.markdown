@@ -23,6 +23,8 @@ who issued those assets (known as a gateway) will be able to redeem them.
 2. The consensus algorithm which powers Stellar relies on trusting a set of nodes not to collude
 with one another to defraud the system. 
 
+
+
 ### Trusting a Gateway
 
 Somewhat confusingly, Stellar is both the name of the currency and the name of the overarching
@@ -66,10 +68,10 @@ hiring auditors), and the customer (distributing assets between more than one ga
 credits as soon as possible), it is nonetheless a real risk. In an ideal world, every transaction
 would be free of counterparty risk and reliance on third parties. However, **we don't live in that
 world yet**. People will still be dealing with fiat currencies and other non-digital assets for a
-long time. We shouldn't view Stellar as a replacement for Bitcoin and everything that the cryptocurrency
-community stands for. Rather, we should see Stellar as an intermediate step, co-existing with the
-rest of the cryptocurrency ecosystem while providing a faster, easier, cheaper, and safer way to
-deal with fiat currencies and other real-world assets for as long as we'll need to.
+long time. We shouldn't view Stellar as a replacement for Bitcoin and everything that the
+cryptocurrency community stands for. Rather, we should see Stellar as co-existing with the rest of
+the cryptocurrency ecosystem while providing a faster, easier, cheaper, and safer way to deal with
+fiat currencies and other real-world assets when we need to.
 
 Consider this- the easiest way for an average person to acquire BTC today is to go through an
 exchange. The process of buying BTC from an exchange is far from trustless, and usually involves
@@ -97,7 +99,7 @@ between exchanges.
 
 
 
-### Trust in the Concencus Algorithm
+### Trust in the Consensus Algorithm
 
 Bitcoin has a battle-tested, Proof-of-Work-based consensus algorithm which relies on two
 assumptions: the software and cryptographic backbone (e.g. ECDSA and SHA-256) of the network is
