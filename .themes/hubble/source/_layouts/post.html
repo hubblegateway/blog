@@ -33,7 +33,7 @@
 			</div>
 			<div class="other-posts">
 				{% if page.previous %}
-		   		<a class="prev" href="{{page.previous.url}}">
+		   		<a class="prev" href="{{site.root}}{{page.previous.url}}">
 		   			&larr;
 		   			{% if site.titlecase %}
 							{{ page.previous.title | titlecase | truncate: 50}}
@@ -43,7 +43,7 @@
 		   		</a>
 				{% endif %}
 				{% if page.next %}
-					<a class="next pull-right" href="{{page.next.url}}">
+					<a class="next pull-right" href="{{site.root}}{{page.next.url}}">
 						{% if site.titlecase %}
 							{{ page.next.title | titlecase | truncate: 50}}
 						{% else %}
