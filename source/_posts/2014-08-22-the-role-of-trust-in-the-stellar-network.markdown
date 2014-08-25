@@ -23,8 +23,6 @@ who issued those assets (known as a gateway) will be able to redeem them.
 2. The consensus algorithm which powers Stellar relies on trusting a set of nodes not to collude
 with one another to defraud the system. 
 
-
-
 ### Trusting a Gateway
 
 Somewhat confusingly, Stellar is both the name of the currency and the name of the overarching
@@ -50,28 +48,29 @@ and all transactions are signed by your private key. Support for any asset is a 
 Stellar protocol and was baked in from the very beginning, and it is a big part of what makes
 Stellar so powerful.
 
-In order to get non-native assets onto the Stellar network, you need to go through a gateway, which 
-requires trust. Gateways accept customer deposits in some asset and issue credits to
-those customers on the Stellar network. A gateway can function in different ways. Some will work
-more like banks, others will work like exchanges, and still others may find ways of setting up their
-business that we haven't even thought of yet. But all gateways accept deposits and issue credits.
-The credits they issue can act like currency (similar to the way depositing funds in a bank gives
-you credit you can spend at a store) and they are transferable within the Stellar network for
-essentially no cost. The only condition is that in order to receive an asset you must explicitly
-issue trust to the gateway who backs the asset. That makes sense because you wouldn't want to
-receive credit from a gateway you considered untrustworthy.
+In order to get non-native assets onto the Stellar network, you need to go through a gateway, which
+requires trust. Gateways accept customer deposits in some asset and issue credits to those customers
+on the Stellar network. Some gateways can also offer exchange services, such as a web interface to
+access order books, but that is not a requirement. The credits issued by a gateway can act like
+currency (similar to the way depositing funds in a bank gives you credit you can spend at a store)
+and they are transferable within the Stellar network for essentially no cost. The only condition is
+that in order to receive an asset you must explicitly issue trust to the gateway who backs the
+asset. That makes sense because you wouldn't want to receive credit from a gateway you considered
+untrustworthy.
 
 People are not unjustified in criticizing this aspect of the Stellar network. In dealing with these
 credits, you run the risk that, for whatever reason, an issuing gateway might not be able to redeem
 your funds. Although steps can be taken on behalf of both the gateway (insuring customer deposits,
 hiring auditors), and the customer (distributing assets between more than one gateway, redeeming
 credits as soon as possible), it is nonetheless a real risk. In an ideal world, every transaction
-would be free of counterparty risk and reliance on third parties. However, **we don't live in that
-world yet**. People will still be dealing with fiat currencies and other non-digital assets for a
-long time. We shouldn't view Stellar as a replacement for Bitcoin and everything that the
-cryptocurrency community stands for. Rather, we should see Stellar as co-existing with the rest of
-the cryptocurrency ecosystem while providing a faster, easier, cheaper, and safer way to deal with
-fiat currencies and other real-world assets when we need to.
+would be free of counterparty risk and reliance on third parties. However, **not all assets can be
+represented in a trustless digital form**. People will still be dealing with fiat currencies for a
+long time. Even in a world without government-backed fiat, physical assets such as gold and simple
+financial instruments like loans could not be traded digitally without some element of trust. We
+shouldn't view Stellar as a replacement for Bitcoin and everything that the cryptocurrency community
+stands for. Rather, we should see Stellar as co-existing with the rest of the cryptocurrency
+ecosystem while providing a faster, easier, cheaper, and safer way to deal with fiat currencies and
+other real-world assets when we need to.
 
 Consider this- the easiest way for an average person to acquire BTC today is to go through an
 exchange. The process of buying BTC from an exchange is far from trustless, and usually involves
@@ -163,9 +162,8 @@ nodes in your UNL are unique and that they are unlikely to collude to cheat the 
 it's called a ***Unique*** Node List and not a ***Trusted*** Node List.
 
 Admittedly, for now the Stellar consensus algorithm is neither well-documented or battle-tested.
-However, I have it on good authority that David Mazières, creator of the bcrypt hashing algorithm
-and Chief Scientist at Stellar, is currently working on a white paper and mathematical proof along
-the lines of what Satoshi Nakomoto released for Bitcoin. Having a solid proof will help, but
-we can only wait and see if the Stellar algorithm will stand the test of time. If it succeeds, it
-could be a powerful, practical, and in many ways necessary improvement over existing algorithms.
+However, David Mazières, creator of the bcrypt hashing algorithm and Chief Scientist at Stellar, is
+currently working on a white paper and mathematical proof along the lines of what Satoshi Nakomoto
+released for Bitcoin. Having a solid proof will help, but we can only wait and see if the Stellar
+algorithm will stand the test of time.
 
