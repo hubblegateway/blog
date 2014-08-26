@@ -1,0 +1,20 @@
+{% include head.html %}
+<body id="blog">
+  {% include header.html %}
+
+	<div id="posts">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					{{ content }}
+					{% include pagination.html %}
+				</div>
+				{% include sidebar.html %}
+			</div>
+		</div>
+	</div>
+
+  {% include footer.html %}
+
+</body>
+</html>

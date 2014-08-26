@@ -1,6 +1,8 @@
 /* Import all scss files in custom. */
-@import "navbar";
-@import "footer";
-@import "archive";
-@import "blog";
-@import "sidebar";
+@import "components/navbar";
+@import "components/footer";
+@import "components/sidebar";
+
+@import "layouts/archive";
+@import "layouts/blog";
+@import "layouts/blogpost";

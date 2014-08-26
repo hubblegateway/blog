@@ -14,7 +14,7 @@
 			</div>
 			{% endif %}
 			<div class="row">
-				<div class="col-md-10 post">
+				<div class="col-md-9 post">
 					<div class="title">
 						{% if site.titlecase %}
 							{{ page.title | titlecase }}
@@ -30,6 +30,7 @@
 						{{ content | expand_urls: site.root }}
 					</div>				
 				</div>
+				{% include sidebar.html %}
 			</div>
 			<div class="other-posts">
 				{% if page.previous %}

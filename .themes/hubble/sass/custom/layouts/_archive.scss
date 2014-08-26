@@ -1,0 +1,10 @@
+#archive {
+	@extend #blog;
+	#posts .post {
+		margin-bottom: 20px;
+	}
+	.continue-reading {
+		margin-bottom: 30px;
+		display: inline-block;
+	}
+}

@@ -1,0 +1,13 @@
+#footer .footer-links {
+	// this is only here because we have so few links
+	// aligning them to the right looks better.
+	@media (min-width: 767px) {
+		text-align: right;
+	}
+	@media (max-width: 767px) {
+		// for smaller screens, align center.
+		text-align: center;
+		margin-top: 10px;
+		margin-left: 17px;
+	}
+}

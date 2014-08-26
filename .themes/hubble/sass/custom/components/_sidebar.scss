@@ -1,0 +1,58 @@
+.sidebar {
+
+	margin-top: 35px;
+	padding-left: 5px;
+
+	@media(max-width: 991px) {
+		margin-bottom: 40px;
+	}
+
+	strong {
+		font-weight: 500;
+		color: #444;
+		margin-bottom: 15px;
+		font-size: 17px;
+		display: block;
+	}
+	a {
+		font-size: 14px;
+		display: inline-block;
+		margin-bottom: 5px;
+
+		@media(max-width: 991px) {
+			display: block;
+			margin-bottom: 10px;
+		}
+	}
+
+	#recent-posts {
+		margin-bottom: 45px;
+		@media(max-width: 991px) {
+			display: none;
+		}
+	}
+
+	#contract-work, #gateway {
+		margin-bottom: 15px;
+		padding: 17px;
+		box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+		border-radius: 5px;
+		@media(min-width: 992px) {
+			width: 85%;
+		}
+
+		strong {
+			color: #444;
+		}
+		p {
+			margin-bottom: 5px;
+			font-size: 13px;
+		}
+	}
+}
+
+#blogpost {
+	.sidebar {
+		margin-top: 42px;
+	}
+}

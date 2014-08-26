@@ -1,0 +1,21 @@
+#blogpost #blogpost-wrapper {
+	margin-top: 48px;
+	.post {
+		margin: 0;
+		float: left;
+		padding-right: 70px;
+
+		.content {
+			margin-top: 15px;
+		}
+
+		.author {
+			font-weight: normal;
+			.avatar {
+				max-width: 60px;
+				left: -75px;
+				top: -15px;
+			}
+		}
+	}
+}
