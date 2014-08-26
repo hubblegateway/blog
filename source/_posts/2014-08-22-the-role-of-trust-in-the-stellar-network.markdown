@@ -72,7 +72,7 @@ stands for. Rather, we should see Stellar as co-existing with the rest of the cr
 ecosystem while providing a faster, easier, cheaper, and safer way to deal with fiat currencies and
 other real-world assets when we need to.
 
-Consider this- the easiest way for an average person to acquire BTC today is to go through an
+Consider this - the easiest way for an average person to acquire BTC today is to go through an
 exchange. The process of buying BTC from an exchange is far from trustless, and usually involves
 depositing USD or some other currency into an account that the exchange controls. As we all saw in
 the case of Mt. Gox, it is possible for customers to lose the deposits they trusted the exchange to
@@ -84,12 +84,12 @@ would come with the advantages of the Stellar network. Namely:
 1. **A shared decentralized order book**. This means that market makers can more easily operate on
 multiple exchanges, increasing liquidity for everyone. It also means it is easier for new exchanges
 to enter the market.
-2. **Freely traded assets**. There is a cost to depositing and withdrawing
-funds (that's how the exchange makes money), but once assets enter the network through an exchange,
-they can be traded peer-to-peer for nearly no cost (you'd only need to pay fractions of a penny's
-worth in STR). An exchange wouldn't be able to charge transaction fees on these trades. Nor would
-they necessarily need to, since the trades are happening on decentralized servers throughout the
-stellar network, not on servers belonging to the exchange.
+2. **Freely traded assets**. From the perspective of an exchange, there is a cost to letting customers
+deposit and withdraw funds, because those requests would hit their servers and go through their backend.
+However once assets enter the network through an exchange, they can be traded peer-to-peer on the
+Stellar network without touching the exchange's servers. An exchange would be able to charge transaction
+fees on these trades through a special AccountSet flag in the Stellar API, but they wouldn't necessarily
+need to. It's likely that competitive pressure from other gateways will drive these fees down.
 3. **Hedging risk**. If several exchanges
 operate on the Stellar gateway, it is relatively easy to spread your balance between them. So if one
 goes down you won't lose all your funds. You could do the same thing with existing exchanges, but it
