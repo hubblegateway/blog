@@ -42,4 +42,10 @@
 
 .navbar-inverse .navbar-toggle {
 	border: 0;
+	&.collapsed:focus:not(:hover) {
+		background-color: inherit;
+	}
+	&:not(.collapsed) {
+		background-color: #333;
+	}
 }
