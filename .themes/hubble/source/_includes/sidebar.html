@@ -10,12 +10,8 @@
 	</div>
 	{% endcomment %}
 
-	{% comment %}
-	TODO: Add social links (e.g. twitter)
-	{% endcomment %}
-
-	<div class="best-hits">
-		<strong>Recent Posts:</strong>
+	<div id="recent-posts">
+		<strong>Recent Posts</strong>
 		{% for post in site.posts limit: 5 %}
 			<a href="{{ site.root }}{{ post.url }}">
 				{% if site.titlecase %}
@@ -28,4 +24,28 @@
 		<hr/>
 		<a href="{{ site.root }}/archive">Archive</a>
 	</div>
+
+	<div id="contract-work">
+		<p>
+			Working on a cryptocurrency project and need an extra hand?
+			We're available!
+		</p>
+		<a href="mailto:team@hubbledev.com">
+			 Contact Us
+		</a>
+	</div>
+	<div id="gateway">
+		<p>
+			We're building the first Stellar gateway in the U.S.
+			Visit us to get notified when we launch!
+		</p>
+		<a href="http://hubblegateway.com">
+			Visit Hubble Gateway
+		</a>
+	</div>
+
+	{% comment %}
+	TODO: Add social links (e.g. twitter)
+	{% endcomment %}
+
 </div>

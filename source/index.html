@@ -4,9 +4,7 @@ layout: posts_index
 
 {% for post in site.posts limit: 5 %}
 	{% assign content = post.content %}
-	<div class="post">
 		{% include preview.html %}
-	</div>
 	{% unless forloop.last %}
   		<hr/>
 	{% endunless %}
