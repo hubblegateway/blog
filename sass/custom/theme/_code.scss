@@ -78,6 +78,7 @@ $pre-color: $base1 !default;
 
 .code {
 	.line {
+    white-space: nowrap;
 		white-space: pre;
 	}
 }
