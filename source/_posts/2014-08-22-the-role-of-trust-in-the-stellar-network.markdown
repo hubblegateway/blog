@@ -5,7 +5,7 @@ date: 2014-08-22 14:59:50 -0400
 comments: true
 categories:
 author: "Alex Browne"
-author_email: stephenalexbrowne@gmail.com
+gravatar_url: http://www.gravatar.com/avatar/c2c5b5e4028c774cf620fe99133a3a54.png
 ---
 
 Stellar is a brand new decentralized protocol which supports sending transactions in any currency pair

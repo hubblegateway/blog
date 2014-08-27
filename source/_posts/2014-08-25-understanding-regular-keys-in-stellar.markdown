@@ -5,7 +5,6 @@ date: 2014-08-25 10:06:11 -0400
 comments: true
 categories: 
 author: "Fabio Berger"
-author_email: fabioberger1991@gmail.com
 ---
 
 One awesome feature of the Bitcoin protocol is the ability to easily generate a new private key and corresponding wallet address on your computer. Moving over all your funds into this newly created account is easy and can be done periodically in order to defend against a potentially compromised  private key. On the Stellar protocol, you can generate new wallets the exact same way -- the only issue is that Stellar wallet addresses can have trust relationships that won't move along with your funds. Losing these “trust lines” can be very annoying and so the concept of a regular key was invented. 

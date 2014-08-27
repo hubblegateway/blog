@@ -23,7 +23,9 @@
 						{% endif %}
 					</div>
 					<div class="author">
-						<img src="{% gravatar page.author_email %}" class="avatar" alt="author" />
+						{% if page.gravatar_url %}
+							<img src="{{ page.gravatar_url }}" class="avatar" alt="author" />
+						{% endif %}
 						{% if page.author %}{{page.author}}, {% endif %} {{ page.date_time_html }}
 					</div>
 					<div class="content">
