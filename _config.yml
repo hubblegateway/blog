@@ -3,11 +3,11 @@
 # ----------------------- #
 
 url: http://hubblegateway.com/blog
-title: Hubble Gateway Blog
-subtitle: "The official blog of Hubble, the first trusted U.S. gateway on the Stellar network."
-author: Hubble Gateway
+title: Hubble Dev Blog
+subtitle: "The official blog of Hubble, a development group passionate about cryptocurrencies."
+author: Hubble Dev
 simple_search: https://www.google.com/search
-description: "Hubble is the first trusted U.S. gateway on the Stellar network. Stellar is a decentralized protocol that enables transactions in any pair of currencies instantly. As a gateway, Hubble accepts customer deposits and issues and redeems credit on the Stellar network. Our blog posts are usually about the technical details of their Stellar protocol, its promise, and the challenges we face while starting a gateway."
+description: ""
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
