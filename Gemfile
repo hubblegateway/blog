@@ -16,6 +16,11 @@ group :development do
   gem 'stringex', '~> 1.4.0'
   gem 'nokogiri'
   gem 'iconv', '~> 1.0.3'
+
+  # for deployment
+  gem 'aws-sdk'
+  gem 'colored'
+  gem 'rails' # used for mimetype detection
 end
 
 gem 'sinatra', '~> 1.4.2'

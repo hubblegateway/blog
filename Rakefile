@@ -1,6 +1,8 @@
 require "rubygems"
 require "bundler/setup"
 require "stringex"
+require "./plugins/aws_deploy_tools"
+require "./plugins/red_dragonfly"
 
 ## -- Rsync Deploy config -- ##
 # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
@@ -9,7 +11,23 @@ ssh_port       = "22"
 document_root  = "~/website.com/"
 rsync_delete   = false
 rsync_args     = ""  # Any extra arguments to pass to rsync
-deploy_default = "rsync"
+deploy_default = "s3_cloudfront"
+
+## -- Compressing and Minifying -- ##
+
+# file extensions which should be gzipped on deploy...
+$gzip_exts = ["html", "css", "js", "eot", "svg", "ttf"]
+$gzip_dir = "public"
+
+# file extensions which you want minified on deploy...
+$minify_exts = []
+$minify_dir = "public"
+
+# image file extensions which should be shrunk and/or compressed
+$compress_img_exts = []
+$compress_img_dir  = "public/images/real"
+
+# --
 
 # This will be configured for you when you run config_deploy
 deploy_branch  = "gh-pages"
@@ -229,6 +247,98 @@ end
 
 desc "Generate website and deploy"
 task :gen_deploy => [:integrate, :generate, :deploy] do
+end
+
+desc "Deploy website to s3/cloudfront via aws-sdk"
+task :s3_cloudfront => [:generate, :minify, :gzip, :compress_images] do
+  puts "=================================================="
+  puts "      Deploying to Amazon S3 & CloudFront"
+  puts "=================================================="
+
+  # setup the aws_deploy_tools object
+  config = YAML::load( File.open("_config.yml"))
+  aws_deploy = AWSDeployTools.new(config)
+
+  # get all files in the public directory
+  all_files = Dir.glob("#{$public_dir}/**/*.*")
+
+  # we want the gzipped version of the files, not the regular (non-gzipped) version
+  # excluded files contains all the regular versions, which will not be deployed
+  excluded_files = []
+  $gzip_exts.collect do |ext|
+    excluded_files += Dir.glob("#{$public_dir}/**/*.#{ext}")
+  end
+
+  # we do gzipped files seperately since they have different metadata (:content_encoding => gzip)
+  puts "--> syncing gzipped files...".yellow
+  gzipped_files = Dir.glob("#{$public_dir}/**/*.gz")
+  gzipped_keys = gzipped_files.collect {|f| (f.split("#{$public_dir}/")[1]).sub(".gz", "")}
+
+  aws_deploy.sync(gzipped_keys, gzipped_files,
+          :reduced_redundancy => true,
+          :cache_control => "max_age=86400", #24 hours
+          :content_encoding => 'gzip',
+          :acl => config['acl']
+          )
+
+  puts "--> syncing all other files...".yellow
+  non_gzipped_files = all_files - gzipped_files - excluded_files
+  non_gzipped_keys = non_gzipped_files.collect {|f| f.split("#{$public_dir}/")[1]}
+
+  aws_deploy.sync(non_gzipped_keys, non_gzipped_files,
+          :reduced_redundancy => true,
+          :cache_control => "max_age=86400", #24 hours
+          :acl => config['acl']
+          )
+  
+  # invalidate all the files we just pushed
+  aws_deploy.invalidate_dirty_keys  
+
+  puts "DONE."
+
+end
+
+desc "Compress all applicable content in public/ using gzip"
+task :gzip do
+
+  unless which('gzip')
+    puts "WARNING: gzip is not installed on your system. Skipping gzip..."
+    return
+  end
+
+  @compressor ||= RedDragonfly.new
+
+  $gzip_exts.each do |ext|
+    puts "--> gzipping all #{ext}...".yellow
+    files = Dir.glob("#{$gzip_dir}/**/*.#{ext}")
+    files.each do |f|
+      @compressor.gzip(f)
+    end
+  end
+
+  puts "DONE."
+end
+
+desc "Minify all applicable files in public/ using jitify"
+task :minify do
+  
+  unless which('jitify')
+    puts "WARNING: jitify is not installed on your system. Skipping minification..."
+    return
+  end
+
+  @compressor ||= RedDragonfly.new
+
+  $minify_exts.each do |ext|
+    puts "--> minifying all #{ext}...".yellow
+    files = Dir.glob("#{$minify_dir}/**/*.#{ext}")
+    files.each do |f|
+      @compressor.minify(f)
+    end
+  end
+
+  puts "DONE."
+
 end
 
 desc "copy dot files for deployment"
