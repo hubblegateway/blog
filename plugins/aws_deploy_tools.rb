@@ -20,8 +20,8 @@ class AWSDeployTools
 		@secret_access_key = config['secret_access_key']
 
 		# for privacy, allow user to store aws credentials in a shell env variable
-		@access_key_id ||= ENV['AWS_ACCESS_KEY_ID']
-		@secret_access_key ||= ENV['AWS_SECRET_ACCESS_KEY']
+		@access_key_id ||= ENV['HUBBLE_AWS_ACCESS_KEY_ID']
+		@secret_access_key ||= ENV['HUBBLE_AWS_SECRET_ACCESS_KEY']
 
 		@bucket = config['bucket']
 		@acl = config['acl']
@@ -29,15 +29,16 @@ class AWSDeployTools
 		@dirty_keys = Set.new # a set of keys that are dirty (have been pushed but not invalidated)
 
 		if @bucket.nil?
-    	raise "ERROR: Must provide bucket name in constructor. (e.g. :bucket => 'bucket_name')" 
-	  end
+			raise "ERROR: Must provide bucket name in constructor. (e.g. :bucket => 'bucket_name')" 
+		end
 
-	  if @cf_distribution_id.nil?
-	    puts "WARNING: cf_distribution_id is nil. (you can include it with :cf_distribution_id => 'id')\n Skipping cf invalidations..."
-	  end
+		if @cf_distribution_id.nil?
+			puts "WARNING: cf_distribution_id is nil. (you can include it with :cf_distribution_id => 'id')\n Skipping cf invalidations..."
+		end
 
-
-		@s3 = AWS::S3.new(config)
+		puts "creating S3 object"
+		@s3 = AWS::S3.new(:secret_access_key => @secret_access_key, :access_key_id => @access_key_id)
+		puts "created S3 object"
 
 	end
 
@@ -54,17 +55,17 @@ class AWSDeployTools
 		obj_etag = ""
 
 		begin
-	    obj = @s3.buckets[@bucket].objects[s3_key]
-	    obj_etag = obj.etag # the etag is the md5 of the remote file
-	  rescue
-	   return false
-	  end
+			obj = @s3.buckets[@bucket].objects[s3_key]
+			obj_etag = obj.etag # the etag is the md5 of the remote file
+		rescue
+			return false
+		end
 
 		# the etag is surrounded by quotations. chomp removes them
-	  obj_etag = obj_etag.gsub('"', '')
+		obj_etag = obj_etag.gsub('"', '')
 
 		# compare the etag to the md5 hash of the local file
-	  obj_etag == md5(f_content)
+		obj_etag == md5(f_content)
 
 	end
 
@@ -95,19 +96,19 @@ class AWSDeployTools
 		options.merge! content_type_hash
 		
 		puts "--> pushing #{file.path} to #{s3_key}...".green
-    obj = @s3.buckets[@bucket].objects[s3_key]
-    obj.write(file, options)
+		obj = @s3.buckets[@bucket].objects[s3_key]
+		obj.write(file, options)
 
-    @dirty_keys << s3_key
-    # Special cases for index files.
-    # for /index.html we should also invalidate /
-    # for /archive/index.html we should also invalidate /archive/
-    if (s3_key == "index.html")
+		@dirty_keys << s3_key
+		# Special cases for index files.
+		# for /index.html we should also invalidate /
+		# for /archive/index.html we should also invalidate /archive/
+		if (s3_key == "index.html")
 			@dirty_keys << "/"
-    elsif File.basename(s3_key) == "index.html"
+		elsif File.basename(s3_key) == "index.html"
 			@dirty_keys << s3_key.chomp(s3_key.split("/").last)
-    end
-	  
+		end
+
 	end
 
 	# batch pushes (writes) the files to the s3 bucket at locations
@@ -156,7 +157,7 @@ class AWSDeployTools
 
 	# a convenience method which simply returns the md5 hash of input
 	def md5 (input)
-	  Digest::MD5.hexdigest(input)
+		Digest::MD5.hexdigest(input)
 	end
 
 	# invalidates files (accepts an array of keys or a single key)
@@ -190,7 +191,7 @@ class AWSDeployTools
 
 		# digest calculation based on http://blog.confabulus.com/2011/05/13/cloudfront-invalidation-from-ruby/
 		date = Time.now.strftime("%a, %d %b %Y %H:%M:%S %Z")
-		digest = Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha1'), @secret_access_key, date)).strip
+		digest = Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha1'), @secret_access_key, date)).strip
 
 		uri = URI.parse('https://cloudfront.amazonaws.com/2010-08-01/distribution/' + @cf_distribution_id + '/invalidation')
 

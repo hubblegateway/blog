@@ -256,23 +256,26 @@ task :s3_cloudfront => [:generate, :minify, :gzip, :compress_images] do
   puts "=================================================="
 
   # setup the aws_deploy_tools object
+  puts "--> initializing...".yellow
   config = YAML::load( File.open("_config.yml"))
   aws_deploy = AWSDeployTools.new(config)
 
   # get all files in the public directory
-  all_files = Dir.glob("#{$public_dir}/**/*.*")
+  puts "--> gathering files...".yellow
+  all_files = Dir.glob("#{public_dir}/**/*.*")
 
   # we want the gzipped version of the files, not the regular (non-gzipped) version
   # excluded files contains all the regular versions, which will not be deployed
+  puts "--> gzipping...".yellow
   excluded_files = []
   $gzip_exts.collect do |ext|
-    excluded_files += Dir.glob("#{$public_dir}/**/*.#{ext}")
+    excluded_files += Dir.glob("#{public_dir}/**/*.#{ext}")
   end
 
   # we do gzipped files seperately since they have different metadata (:content_encoding => gzip)
   puts "--> syncing gzipped files...".yellow
-  gzipped_files = Dir.glob("#{$public_dir}/**/*.gz")
-  gzipped_keys = gzipped_files.collect {|f| (f.split("#{$public_dir}/")[1]).sub(".gz", "")}
+  gzipped_files = Dir.glob("#{public_dir}/**/*.gz")
+  gzipped_keys = gzipped_files.collect {|f| (f.split("public/")[1]).sub(".gz", "")}
 
   aws_deploy.sync(gzipped_keys, gzipped_files,
           :reduced_redundancy => true,
@@ -283,7 +286,7 @@ task :s3_cloudfront => [:generate, :minify, :gzip, :compress_images] do
 
   puts "--> syncing all other files...".yellow
   non_gzipped_files = all_files - gzipped_files - excluded_files
-  non_gzipped_keys = non_gzipped_files.collect {|f| f.split("#{$public_dir}/")[1]}
+  non_gzipped_keys = non_gzipped_files.collect {|f| f.split("public/")[1]}
 
   aws_deploy.sync(non_gzipped_keys, non_gzipped_files,
           :reduced_redundancy => true,
@@ -511,4 +514,12 @@ desc "list tasks"
 task :list do
   puts "Tasks: #{(Rake::Task.tasks - [Rake::Task[:list]]).join(', ')}"
   puts "(type rake -T for more detail)\n\n"
+end
+
+##
+# invoke system which to check if a command is supported
+# from http://stackoverflow.com/questions/2108727/which-in-ruby-checking-if-program-exists-in-path-from-ruby
+# which('ruby') #=> /usr/bin/ruby
+def which(cmd)
+  system("which #{ cmd} > /dev/null 2>&1")
 end

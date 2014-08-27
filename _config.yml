@@ -63,6 +63,10 @@ default_asides: [asides/recent_posts.html, asides/github.html]
 #   3rd Party Settings    #
 # ----------------------- #
 
+# Amazon AWS
+bucket: www.hubbledev.com
+# cf_distribution_id: E6ILHGTQO4J9G
+
 # Github repositories
 github_user:
 github_repo_count: 0
