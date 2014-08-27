@@ -18,41 +18,48 @@ A Regular Key is a secondary private key that can be assigned to your Stellar wa
 
 1. The first step is to generate a Stellar wallet address and private key:
 
-	curl -X POST https://live.stellar.org:9002 -d '{ "method" : "create_keys" }'
+{% codeblock lang:json %}
+curl -X POST https://live.stellar.org:9002 -d '{
+	"method" : "create_keys"
+}'
+{% endcodeblock %}
 
 Result:
 
-
-	{
-	  "result": {
-	    "account_id": "gGC7FTRFLjNTRk3gWCM7zwwWWbLSgT6A6y",
-	    "master_seed": "s3j9fcVnSNwnVTMZScpGExQg95cV4rSYJcPmhcCm3T2eJehwxNV",
-	    "master_seed_hex": "CFEE1389FBBB82321C6B661726504248BE868C881CE4A62669DEF6EFF19DC8D0",
-	    "public_key": "pEiEgTbDQHSLeCpmDdy6TmC12AZ1oZn83rc9nzjzxYkpHuinjhh",
-	    "public_key_hex": "504D206EADF04B079BBF66BE1729F0425AC39B65C1F23F451F80A2140044C547",
-	    "status": "success"
-	  }
-	}
+{% codeblock lang:json %}
+{
+  "result": {
+    "account_id": "gGC7FTRFLjNTRk3gWCM7zwwWWbLSgT6A6y",
+    "master_seed": "s3j9fcVnSNwnVTMZScpGExQg95cV4rSYJcPmhcCm3T2eJehwxNV",
+    "master_seed_hex": "CFEE1389FBBB82321C6B661726504248BE868C881CE4A62669DEF6EFF19DC8D0",
+    "public_key": "pEiEgTbDQHSLeCpmDdy6TmC12AZ1oZn83rc9nzjzxYkpHuinjhh",
+    "public_key_hex": "504D206EADF04B079BBF66BE1729F0425AC39B65C1F23F451F80A2140044C547",
+    "status": "success"
+  }
+}
+{% endcodeblock %}
 
 You should save this output in a safe place as it includes your new regular key (master_seed).
 
 The next step is to assign this new regular key to our existing account:
 
-	curl -X POST https://live.stellar.org:9002 -d '
+{% codeblock lang:json %}
+curl -X POST https://live.stellar.org:9002 -d '
 
-	{
-	  "method": "submit",
-	  "params": [
-	    {
-	      "secret": "YOUR_SECRET_HERE",
-	      "tx_json": {
-	        "TransactionType": "SetRegularKey",
-	        "RegularKey": "s3j9fcVnSNwnVTMZScpGExQg95cV4rSYJcPmhcCm3T2eJehwxNV",
-	      }
-	    }
-	  ]
-	}
-	'
+{
+  "method": "submit",
+  "params": [
+    {
+      "secret": "YOUR_SECRET_HERE",
+      "tx_json": {
+        "TransactionType": "SetRegularKey",
+        "RegularKey": "s3j9fcVnSNwnVTMZScpGExQg95cV4rSYJcPmhcCm3T2eJehwxNV",
+      }
+    }
+  ]
+}
+'
+{% endcodeblock %}
 
 Once this returns successfully, the regular key will be set on your Stellar address and you can now use the regular key when dealing with your Stellar wallet address. If this key ever becomes compromised or you want to revoke its permissions over your wallet, you can call this exact same API call while omitting the RegularKey parameter. If you want to overwrite this regular key with a newly generated key, just call this method again with a new regular key defined. 
 
