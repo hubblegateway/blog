@@ -1,0 +1,29 @@
+#blogpost #blogpost-wrapper, #blog #posts, #archive #posts {
+	.post {
+		.author {
+			font-weight: normal;
+			.avatar {
+				max-width: 60px;
+				left: -75px;
+				top: -15px;
+				@media (max-width: 1120px) and (min-width: 992px) {
+					position: static;
+					max-width: 36px;
+					margin-right: 8px;
+				}
+				@media (max-width: 900px) {
+					position: static;
+					max-width: 36px;
+					margin-right: 8px;
+				}
+			}
+		}
+		@media (max-width: 991px) {
+			.title {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+
+}
