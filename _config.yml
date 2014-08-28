@@ -65,7 +65,7 @@ default_asides: [asides/recent_posts.html, asides/github.html]
 
 # Amazon AWS
 bucket: www.hubbledev.com
-# cf_distribution_id: E6ILHGTQO4J9G
+cf_distribution_id: E6ILHGTQO4J9G
 
 # Github repositories
 github_user:

@@ -17,5 +17,10 @@
 				top: -15px;
 			}
 		}
+
+		@media (max-width: 991px) {
+			padding-right: 15px;
+			width: 100%;
+		}
 	}
 }
