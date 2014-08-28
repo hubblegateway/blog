@@ -8,7 +8,7 @@ author: "Alex Browne"
 gravatar_url: http://www.gravatar.com/avatar/c2c5b5e4028c774cf620fe99133a3a54.png
 ---
 
-Stellar is a brand new decentralized protocol which supports sending transactions in any currency pair
+Stellar is a decentralized protocol which supports sending transactions in any currency pair
 from anywhere in the world, all in a matter of seconds and with near-zero transaction fees.
 You can find out more about Stellar on their official website: [stellar.org](https://www.stellar.org).
 
