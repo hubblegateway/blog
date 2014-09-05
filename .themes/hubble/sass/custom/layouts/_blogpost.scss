@@ -1,0 +1,17 @@
+#blogpost #blogpost-wrapper {
+	margin-top: 48px;
+	.post {
+		margin: 0;
+		float: left;
+		padding-right: 70px;
+
+		.content {
+			margin-top: 15px;
+		}
+
+		@media (max-width: 991px) {
+			padding-right: 15px;
+			width: 100%;
+		}
+	}
+}

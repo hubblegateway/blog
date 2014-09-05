@@ -16,11 +16,13 @@
 		</a>
 	</div>
 	<div class="author">
-		<img src="{% gravatar post.author_email %}" class="avatar" alt="author" />
+		{% if post.gravatar_url %}
+			<img src="{{ post.gravatar_url }}" class="avatar" alt="author" />
+		{% endif %}
 		{% if post.author %}{{post.author}}, {% endif %} {{ post.date_time_html }}
 	</div>
-	<p class="intro">
+	<div class="intro">
 		{{ post.content | truncatehtml: 1000 }}
-	</p>
+	</div>
 	<a rel="full-article" class="continue-reading" href="{{ site.root }}{{ post.url }}">{{ site.excerpt_link }}</a>
 </div>

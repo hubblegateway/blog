@@ -1,0 +1,22 @@
+// Custom styles on the #blog layout
+
+#blog {
+	#posts {
+		.post {
+			.title {
+				font-family: $myriad;
+				font-size: 31px;
+				font-weight: 600;
+				color: #252525;
+				@media (max-width: 991px) {
+					text-align: left;
+				}
+			}
+			.intro {
+				font-family: $merriweather;
+				font-size: 14px;
+				color: #353535;
+			}
+		}
+	}
+}

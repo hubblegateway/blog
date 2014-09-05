@@ -14,7 +14,7 @@
 			</div>
 			{% endif %}
 			<div class="row">
-				<div class="col-md-10 post">
+				<div class="col-md-9 post">
 					<div class="title">
 						{% if site.titlecase %}
 							{{ page.title | titlecase }}
@@ -23,40 +23,44 @@
 						{% endif %}
 					</div>
 					<div class="author">
-						<img src="{% gravatar page.author_email %}" class="avatar" alt="author" />
+						{% if page.gravatar_url %}
+							<img src="{{ page.gravatar_url }}" class="avatar" alt="author" />
+						{% endif %}
 						{% if page.author %}{{page.author}}, {% endif %} {{ page.date_time_html }}
 					</div>
 					<div class="content">
 						{{ content | expand_urls: site.root }}
+					</div>
+					<div class="other-posts">
+						{% if page.previous %}
+				   		<a class="prev" href="{{site.root}}{{page.previous.url}}">
+				   			&larr;
+				   			{% if site.titlecase %}
+									{{ page.previous.title | titlecase | truncate: 50}}
+								{% else %}
+									{{ page.previous.title | truncate: 50}}
+								{% endif %}
+				   		</a>
+						{% endif %}
+						{% if page.next %}
+							<a class="next pull-right" href="{{site.root}}{{page.next.url}}">
+								{% if site.titlecase %}
+									{{ page.next.title | titlecase | truncate: 50}}
+								{% else %}
+									{{ page.next.title | truncate: 50}}
+								{% endif %}
+								&rarr;
+							</a>
+						{% endif %}
 					</div>				
 				</div>
+				{% include sidebar.html %}
 			</div>
-			<div class="other-posts">
-				{% if page.previous %}
-		   		<a class="prev" href="{{site.root}}{{page.previous.url}}">
-		   			&larr;
-		   			{% if site.titlecase %}
-							{{ page.previous.title | titlecase | truncate: 50}}
-						{% else %}
-							{{ page.previous.title | truncate: 50}}
-						{% endif %}
-		   		</a>
-				{% endif %}
-				{% if page.next %}
-					<a class="next pull-right" href="{{site.root}}{{page.next.url}}">
-						{% if site.titlecase %}
-							{{ page.next.title | titlecase | truncate: 50}}
-						{% else %}
-							{{ page.next.title | truncate: 50}}
-						{% endif %}
-						&rarr;
-					</a>
-				{% endif %}
-			</div>	
 		</div>
 	</div>
 
   {% include footer.html %}
 
+	{% include google_analytics.html %}
 </body>
 </html>
