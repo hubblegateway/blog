@@ -51,8 +51,8 @@ add the following yaml frontmatter to the top of the blog post:
 | Name         | Meaning                                                                                                                      |
 |--------------|------------------------------------------------------------------------------------------------------------------------------|
 | author       | The first and last name of the author (a.k.a. you!)                                                                          |
-| author_email | Your email address. Don't worry, it won't actually be displayed on the page, but is used for getting a nifty gravatar image. |
-| header_image | (optional) The url for the header image for the post, starting at public. You should put the actual image in source/images.   |
+| gravatar_url | The url to a gravatar profile image [gravatar.com](https://en.gravatar.com/)                                                 |
+| header_image | (optional) The url for the header image for the post, starting at public. You should put the actual image in source/images.  |
 
 Here's an example of the entire frontmatter section (including auto-generated info):
 
@@ -63,7 +63,7 @@ date: 2014-08-21 20:03:43 -0400
 comments: true
 categories: 
 author: "Alex Browne"
-author_email: "stephenalexbrowne@gmail.com"
+gravatar_url: http://www.gravatar.com/avatar/c2c5b5e4028c774cf620fe99133a3a54.png
 header_image: /blog/images/blogpost5.png
 ```
 
