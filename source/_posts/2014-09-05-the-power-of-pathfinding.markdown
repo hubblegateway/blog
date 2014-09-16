@@ -8,29 +8,83 @@ author: "Alex Browne"
 gravatar_url: http://www.gravatar.com/avatar/c2c5b5e4028c774cf620fe99133a3a54.png
 ---
 
-Path-finding is a powerful (but currently not well-documented) feature of the Stellar
+Path-finding is a powerful (but currently under-documented) feature of the Stellar
 protocol. In short, it allows two parties who don't trust each other, don't trust
 the same gateway, and don't even deal in the same currencies to transact with one
-another seamlessly.
+another seamlessly. In this post, I'll explain why path-finding is such a powerful
+feature and walk you through a step-by-step example of how to use it.
 
-The best way to explain why this feature kicks ass is with an
-example. So a bulk of this post contains step-by-step instructions for executing a
-transaction which utilizes path-finding on the Stellar test network.
-
-If you want to find out more about Stellar and everything it has to offer,
-visit the [official Stellar website](http://stellar.org). You can also read my
+Stellar (a fork of Ripple) is a decentralized protocol that enables the transfer of
+any asset instantly and with near-zero transaction fees. If you want to find out more
+about Stellar and everything it has to offer, visit the
+[official Stellar website](http://stellar.org). You can also read my
 [previous post](/blog/2014/08/22/the-role-of-trust-in-the-stellar-network/) to
-learn more about what trusting a gateway means.
+learn more about what "trust" means in the context of the Stellar network.
 
-### Prerequisites
+### Why it Matters
 
-The following instructions are as simple as possible and only require that you
-are familiar with using terminal or command prompt. The instructions will frequently
-make use of curl, a command line tool for sending a variety of http requests which
-is available for most major operating systems. If you are using Windows, you may
-need to [download it and install a windows version](http://www.confusedbycode.com/curl/).
+The ability to send someone else money is a fundemental part of any economy.
+Yet even with technology making every part of our lives more convenient,
+the processes we use to send money are remarkably archaic and ineffecient. Consider
+one of the most common ways of transferring money in the United States, the ACH system
+(this is usually what people are referring to when they say
+"bank transfer" or "wire transfer"). The folks at ZenPayroll have done a great
+job of explaining
+[how ACH works](http://engineering.zenpayroll.com/how-ach-works-a-developer-perspective-part-1/)
+in a series of blog posts. The process takes a minimum of 4 days, and involves
+sending files back and forth over secure FTP between the originating bank (the
+bank that initiated the transfer request), the Federal Reserve, and the target bank
+(the bank that will receive and respond to the transfer request). Among other inefficiencies,
+there is no way for an originating bank to know whether or not the transfer succeeded except
+to wait for the full 4 days! If they don't receive any error messages during that time,
+they assume the transfer worked. On the ACH system, the only way to send or receive money
+is to give someone your account number and routing number. But anyone that has that information
+can charge your account and take money from you! For those who are familiar with Bitcoin and other
+cryptocurrencies, it's like your public address and your private key are the same!
+The whole thing is laughably ineffecient compared to the kinds of modern software
+solutions people all over the world are building today (and really, compared to anything
+within the last 15 years). 
+
+And that's just to send money between two banks in the U.S.! Sending money accross
+country lines is even more complicated and costly. International bank transfers
+incur higher fees, and can take anywhere from 2-20 days to be confirmed. What's more,
+many customers don't even know how much an international transfer will cost until
+after it goes through! Erin McCune from paymentsviews.com wrote a great post explaining
+[why international transfers are so expensive and complicated](http://paymentsviews.com/2014/05/15/there-is-no-such-thing-as-an-international-wire/).
+
+Path-finding on the Stellar network offers a cheap and effecient way to send
+money between different currencies and accross country lines. It reduces overhead
+costs by not relying on a central clearing house or any other third parties. It
+doesn't require you to trust a third party international transfer business. It
+minimizes counterparty risk by doing multi-stage transfers involving several different
+parties in a single, atomic, and irreversible transaction. And transactions on the
+Stellar network happen in a matter of seconds, not days.
 
 ### Step-By-Step Example
+
+Path-finding is not an idea or a theory. It is a feature that exists on the Stellar
+network ***today*** that anyone can use. In the rest of this post, I'm going to
+walk you through an example where we'll use the [stellar.org API](https://www.stellar.org/api/)
+to perform a transaction with path-finding.
+
+Keep in mind that in the real world, products and services built on the Stellar
+network can abstract away the nitty gritty details. End users obviously don't want
+to have to hack around on terminal to send transactions, and they won't have to.
+
+It's also important to note that while in this example we'll be communicating with
+stellar.org directly, that is in no way a requirement. Stellar is a decentralized
+protocol and anyone can spin up their own node on the network. Businesses built on
+the stellar network can and definitely should run their own node for better performance
+(it takes time to send API requests from your server to stellar.org), robustness
+(what happens if stellar.org goes down?), and security (you shouldn't be sending
+your private keys to any other server).
+
+However, since this is just a learning exercise, we don't care about performance
+or robustness. And since we'll be using the test network and not dealing with any
+assets of real value, we don't need to worry about security. Using the stellar.org
+API directly will work fine for our purposes. 
+
+#### The Scenario
 
 The hypothetical scenario we will be creating in this example is as follows:
 
@@ -41,6 +95,18 @@ The hypothetical scenario we will be creating in this example is as follows:
 - User B deals only with EUR and does not want to hold other currencies.
 - Market Maker trusts both Gateway A and Gateway B and wants to make a profit by facilitating the transfer of funds between them.
 
+#### Prerequisites
+
+The following instructions are written to be as simple as possible and only require that you
+are familiar with using terminal or command prompt. The instructions will frequently
+make use of curl, a command line tool for sending a variety of http requests which
+is available for most major operating systems. If you are using Windows, you may
+need to [download it and install a windows version](http://www.confusedbycode.com/curl/).
+
+#### Creating Accounts
+
+Let's get started!
+
 There are 5 parties, so we will need to create 5 Stellar accounts:
 
 1. User A
@@ -48,8 +114,6 @@ There are 5 parties, so we will need to create 5 Stellar accounts:
 3. Gateway A
 4. Gateway B
 5. Market Maker
-
-#### Creating Accounts
 
 To create a new Stellar account and get the associated private key, we can send
 a ["create_keys" command](https://www.stellar.org/api/#api-create_keys) to the Stellar API.
@@ -412,6 +476,8 @@ the Stellar network know we want to use the path we just found.
 Note that SendMax is the *maximum* amount that User A is willing to pay. Stellar will automatically
 find the cheapest option for User A, so they may end up paying less.
 
+Here's what the curl request looks like:
+
 {% codeblock lang:bash %}
 curl -X POST https://test.stellar.org:9002 -d '
 {
@@ -455,6 +521,36 @@ curl -X POST https://test.stellar.org:9002 -d '
     ]
 }'
 {% endcodeblock %}
+
+Here's what just happened:
+
+1. User A was debited 504 USD.
+2. Market Maker was credited 504 USD and debited 386 EUR.
+3. User B was credited 386 EUR.
+
+In effect, User A was able to send USD issued by the gateway he trusts. His USD was automatically
+converted to EUR at the best possible price. And User B was able to receive EUR issued by the gateway
+he trusts. No one trusted anyone they didn't want to trust or took on risk they didn't
+want to take on. Market Maker is the only party in the process that took on any risk, and as
+compensation for that risk he has earned a small profit.
+
+All of that happened in one atomic step, and it only took a few seconds. That's really important,
+because if any part of the process didn't go through, someone would be left with currency they
+didn't want from a gateway they didn't want to trust. But with path-finding, User A never at
+any point had to hold any EUR, nor did User B ever need to hold USD. That's amazing!
+
+### Conclusion
+
+Path-finding is an insanely awesome feature, and it is the crux of what makes Stellar so powerful.
+It works ***right now*** and can be used by anyone. The only thing that's missing is the maturity
+of the ecosystem. If Stellar succeeds and gateways are started all over the world,
+path-finding could enable a host of exciting products and services. To name a few:
+
+1. Cheaper, faster domestic transfers with basically zero fees
+2. Remittance payments with lower fees due to the reduced risk, reduced overhead, and direct competition between market makers with no lock-in
+3. An ATM which accepts many different currencies and allows users to withdraw cash in local currencies
+4. A debit card which can be used anywhere in the world and automatically converts and pays out merchants in whatever currency they prefer
+
 
 
 
